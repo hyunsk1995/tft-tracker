@@ -5,9 +5,9 @@ import time
 import pandas as pd
 from playwright.sync_api import sync_playwright
 
-from config import HEADLESS, KAKAO_TXT, LATEST_CSV, PLAYERS
+from achievements import update_achievements
+from config import HEADLESS, LATEST_CSV, PLAYERS
 from history import build_row, load_history, load_yesterday_snapshot, save_history
-from message import build_kakao_message
 from report import build_html, publish_to_pages
 from scraper import scrape_player
 from tiers import format_short_rank
@@ -37,6 +37,8 @@ def main() -> None:
             found, error = scrape_player(page, player)
             if error:
                 print(f"   ⚠ {error}")
+            else:
+                print(f"   ✓ {format_short_rank(*found)}")
             rows.append(build_row(player, found, error, prev_map.get(player["name"])))
             time.sleep(1.5)
 
@@ -45,19 +47,14 @@ def main() -> None:
     save_history(history, rows)
     pd.DataFrame(rows).to_csv(LATEST_CSV, index=False, encoding="utf-8-sig")
 
-    msg = build_kakao_message(rows)
-    KAKAO_TXT.write_text(msg, encoding="utf-8")
-
-    build_html(rows)
+    achievements = update_achievements(rows)
+    build_html(rows, achievements)
     try:
         publish_to_pages()
     except subprocess.CalledProcessError as e:
         print(f"웹페이지 업로드 실패: {e}")
 
-    print("\n--- 카카오톡 복사용 ---")
-    print(msg)
-    print("---------------------")
-    print(f"저장 완료: {KAKAO_TXT}, {LATEST_CSV}")
+    print(f"저장 완료: {LATEST_CSV}, docs/index.html")
 
 
 if __name__ == "__main__":

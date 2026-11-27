@@ -29,3 +29,6 @@ TAUNT_BEHIND = [
     "{team}, 지금 점수로는 좀 많이 불안해 보입니다. 분발하세요, 분발! 😤",
 ]
 TAUNT_TIE = "두 팀 막상막하네요. 누가 먼저 무너질지 기대됩니다 🍿"
+
+ACHIEVE_FILE = Path("tft_achievements.json")   # 달성 순서 기록
+POINTS = [8, 7, 6, 5, 4, 3, 2, 1]              # 1등~8등 점수
