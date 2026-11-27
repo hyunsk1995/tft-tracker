@@ -22,13 +22,16 @@ body {
   margin: 0; background: var(--bg); color: var(--text);
   font-family: -apple-system, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
 }
-.wrap { max-width: 880px; margin: 0 auto; padding: 24px 16px 48px; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
 header h1 { margin: 0 0 4px; font-size: 1.6rem; }
 header p { margin: 0; color: var(--muted); font-size: .9rem; }
 
+.layout { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; margin-top: 20px; }
+.side { position: sticky; top: 16px; }
+
 .summary {
   display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px;
-  margin: 20px 0; align-items: stretch;
+  margin-bottom: 16px; align-items: stretch;
 }
 .team-box {
   background: var(--card); border: 1px solid var(--line);
@@ -44,11 +47,12 @@ header p { margin: 0; color: var(--muted); font-size: .9rem; }
   border-radius: 12px; padding: 12px 16px; margin-bottom: 24px;
 }
 
-section.team {
+section.team, section.lb-box {
   background: var(--card); border: 1px solid var(--line);
   border-radius: 12px; padding: 8px 0 4px; margin-bottom: 20px; overflow: hidden;
 }
-section.team h2 { margin: 8px 16px 4px; font-size: 1.05rem; }
+section.team h2, section.lb-box h2 { margin: 8px 16px 4px; font-size: 1.05rem; }
+
 table { width: 100%; border-collapse: collapse; font-size: .92rem; }
 th, td {
   padding: 10px 12px; text-align: center; white-space: nowrap;
@@ -57,6 +61,14 @@ th, td {
 th { color: var(--muted); font-weight: 600; font-size: .8rem; }
 td.name { text-align: left; font-weight: 600; }
 .nick { color: var(--muted); font-size: .8rem; font-weight: 400; }
+
+table.lb { font-size: .84rem; }
+table.lb th, table.lb td { padding: 8px 6px; white-space: normal; }
+table.lb tr.pending td { color: var(--muted); }
+
+.pts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.pts .team-box { padding: 10px 12px; }
+.pts .team-box .num { font-size: 1.3rem; }
 
 .icon { width: 22px; height: 22px; vertical-align: middle; margin-right: 4px; }
 .up { color: var(--up); font-weight: 600; }
@@ -67,7 +79,10 @@ td.name { text-align: left; font-weight: 600; }
 
 footer { color: var(--muted); font-size: .8rem; text-align: center; margin-top: 24px; }
 
-@media (max-width: 600px) {
+@media (max-width: 820px) {
+  .layout { grid-template-columns: 1fr; }
+  .side { position: static; }
+  .wrap { max-width: 640px; }
   th, td { padding: 8px 6px; font-size: .85rem; }
   .icon { width: 18px; height: 18px; }
 }
@@ -77,11 +92,15 @@ footer { color: var(--muted); font-size: .8rem; text-align: center; margin-top: 
 <div class="wrap">
 <header>
 <h1>TFT 4대4 현황</h1>
-<p>마지막 갱신 2026-11-28 00:40 · 변화는 어제 기록 기준</p>
+<p>마지막 갱신 2026-11-28 00:47 · 변화는 어제 기록 기준</p>
 </header>
-<div class="summary"><div class="team-box"><h2>A팀</h2><div class="num">5600 LP</div><div class="sub">남은 합 · 변화 +0 LP · 달성 1/4</div></div><div class="vs">VS</div><div class="team-box"><h2>B팀</h2><div class="num">8000 LP</div><div class="sub">남은 합 · 변화 +0 LP · 달성 0/4</div></div></div>
-<div class="verdict">B팀, 남은 LP 보니까 아직 갈 길이 머네요. 설마 벌써 포기하신 건 아니죠? 🙂</div>
-<section class="team"><h2>A팀 · 남은 합 5600 LP</h2><table><tr><th>이름</th><th>랭크</th><th>변화</th><th>목표</th><th>남은 LP</th></tr><tr><td class="name">김현성<br><span class="nick">샤코무조건밴함#KR1</span></td><td><img class="icon" src="tier_icons/Master.webp" alt="master">Master 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Master.webp" alt="master">Master 0 LP</td><td><span class="done">달성 🏆</span></td></tr><tr><td class="name">허종원<br><span class="nick">허조이#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Emerald.webp" alt="emerald">Emerald 4 0 LP</td><td>2000 LP</td></tr><tr><td class="name">최민교<br><span class="nick">밍링링#KR930</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Emerald.webp" alt="emerald">Emerald 4 0 LP</td><td>2000 LP</td></tr><tr><td class="name">김명진<br><span class="nick">밝은보배#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Platinum.webp" alt="platinum">Platinum 4 0 LP</td><td>1600 LP</td></tr></table></section><section class="team"><h2>B팀 · 남은 합 8000 LP</h2><table><tr><th>이름</th><th>랭크</th><th>변화</th><th>목표</th><th>남은 LP</th></tr><tr><td class="name">안훈규<br><span class="nick">ORaNGE TUNNEL#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Diamond.webp" alt="diamond">Diamond 4 0 LP</td><td>2400 LP</td></tr><tr><td class="name">이민훈<br><span class="nick">protein shake#0215</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Emerald.webp" alt="emerald">Emerald 4 0 LP</td><td>2000 LP</td></tr><tr><td class="name">이서희<br><span class="nick">수퍼 말차 워터#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Emerald.webp" alt="emerald">Emerald 4 0 LP</td><td>2000 LP</td></tr><tr><td class="name">최요하<br><span class="nick">97463520del#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Platinum.webp" alt="platinum">Platinum 4 0 LP</td><td>1600 LP</td></tr></table></section>
+<div class="layout">
+<div class="main"><div class="summary"><div class="team-box"><h2>A팀</h2><div class="num">5600 LP</div><div class="sub">남은 합 · 변화 +0 LP · 달성 1/4</div></div><div class="vs">VS</div><div class="team-box"><h2>B팀</h2><div class="num">6400 LP</div><div class="sub">남은 합 · 변화 +0 LP · 달성 0/4</div></div></div><div class="verdict">B팀, 혹시 지금 여유 부리는 중이신가요? 😏 분발 좀 해주셔야 할 것 같은데요~</div><section class="team"><h2>A팀 · 남은 합 5600 LP</h2><table><tr><th>이름</th><th>랭크</th><th>변화</th><th>목표</th><th>남은 LP</th></tr><tr><td class="name">김현성<br><span class="nick">샤코무조건밴함#KR1</span></td><td><img class="icon" src="tier_icons/Master.webp" alt="master">Master 0 LP</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Master.webp" alt="master">Master 0 LP</td><td><span class="done">달성 🏆</span></td></tr><tr><td class="name">허종원<br><span class="nick">허조이#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Emerald.webp" alt="emerald">Emerald 4 0 LP</td><td>2000 LP</td></tr><tr><td class="name">최민교<br><span class="nick">밍링링#KR930</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Emerald.webp" alt="emerald">Emerald 4 0 LP</td><td>2000 LP</td></tr><tr><td class="name">김명진<br><span class="nick">밝은보배#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Platinum.webp" alt="platinum">Platinum 4 0 LP</td><td>1600 LP</td></tr></table></section><section class="team"><h2>B팀 · 남은 합 6400 LP</h2><table><tr><th>이름</th><th>랭크</th><th>변화</th><th>목표</th><th>남은 LP</th></tr><tr><td class="name">안훈규<br><span class="nick">ORaNGE TUNNEL#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Diamond.webp" alt="diamond">Diamond 4 0 LP</td><td>2400 LP</td></tr><tr><td class="name">이민훈<br><span class="nick">protein shake#0215</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Emerald.webp" alt="emerald">Emerald 4 0 LP</td><td>2000 LP</td></tr><tr><td class="name">이서희<br><span class="nick">수퍼 말차 워터#KR1</span></td><td><img class="icon" src="tier_icons/Unranked.webp" alt="unranked">Unranked</td><td><span class="flat">+0 LP</span></td><td><img class="icon" src="tier_icons/Emerald.webp" alt="emerald">Emerald 4 0 LP</td><td>2000 LP</td></tr><tr class="err"><td class="name">최요하<br><span class="nick">97463520del#KR1</span></td><td colspan="4">조회 실패 · 브라우저 오류: Page.goto: Navigation to &quot;https://lolchess.gg/profile/kr/97463520del-KR1&quot; is interrupted by another navigation to &quot;https://lolchess.gg/profile/kr/%EC%88%98%ED%8D%BC%20%EB%A7%90%EC%B0%A8%20%EC%9B%8C%ED%84%B0-KR1/set18&quot;
+Call log:
+  - navigating to &quot;https://lolchess.gg/profile/kr/97463520del-KR1&quot;, waiting until &quot;domcontentloaded&quot;
+</td></tr></table></section></div>
+<aside class="side"><section class="lb-box"><h2>달성 순서</h2><table class="lb"><tr><th>순위</th><th>이름</th><th>달성일자</th><th>점수</th></tr><tr><td>1</td><td class="name">김현성<br><span class="nick">A팀</span></td><td>2026-11-28 00:47</td><td><b>8</b></td></tr><tr class="pending"><td>-</td><td class="name">허종원<br><span class="nick">A팀</span></td><td>미달성</td><td><b>0</b></td></tr><tr class="pending"><td>-</td><td class="name">최민교<br><span class="nick">A팀</span></td><td>미달성</td><td><b>0</b></td></tr><tr class="pending"><td>-</td><td class="name">김명진<br><span class="nick">A팀</span></td><td>미달성</td><td><b>0</b></td></tr><tr class="pending"><td>-</td><td class="name">안훈규<br><span class="nick">B팀</span></td><td>미달성</td><td><b>0</b></td></tr><tr class="pending"><td>-</td><td class="name">이민훈<br><span class="nick">B팀</span></td><td>미달성</td><td><b>0</b></td></tr><tr class="pending"><td>-</td><td class="name">이서희<br><span class="nick">B팀</span></td><td>미달성</td><td><b>0</b></td></tr><tr class="pending"><td>-</td><td class="name">최요하<br><span class="nick">B팀</span></td><td>미달성</td><td><b>0</b></td></tr></table></section><div class="pts"><div class="team-box"><h2>A팀</h2><div class="num">8점</div></div><div class="team-box"><h2>B팀</h2><div class="num">0점</div></div></div></aside>
+</div>
 <footer>데이터 출처: lolchess.gg · 자동 생성</footer>
 </div>
 </body>
